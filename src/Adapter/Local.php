@@ -365,7 +365,10 @@ class Local extends AbstractAdapter
     {
         $location = $this->applyPathPrefix($path);
         $type = is_dir($location) ? 'dir' : 'file';
-        $success = chmod($location, $this->permissionMap[$type][$visibility]);
+        //$success = chmod($location, $this->permissionMap[$type][$visibility]);
+        
+        //for samba servers - mounts chmod don't work
+        $success = true;
 
         if ($success === false) {
             return false;
